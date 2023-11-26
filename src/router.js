@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Gallery from './components/Gallery.vue';
-import Map from './components/Map.vue';
+import MapPage from './components/MapPage.vue';
 
 
 Vue.use(Router);
@@ -18,9 +18,9 @@ export default new Router({
       component: Gallery
     },
     {
-      path: '/Map',
-      name: 'Map',
-      component: Map
+      path: '/map-page',
+      name: 'MapPage',
+      component: MapPage
     }
   ]
 });

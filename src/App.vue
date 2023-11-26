@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-lg bg-body-tertiary bg-primary bg-gradient mt-0 navbar-fixed-top">
       <div class="container-fluid">
-        <router-link to='/gallery' class="navbar-brand">Graphs</router-link>
+        <router-link to='/gallery' class="navbar-brand">Gallery</router-link>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -12,7 +12,7 @@
               <router-link to='/gallery' class="nav-link" aria-current="page">Gallery</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/map" class="nav-link">Map</router-link>
+              <router-link to="/map-page" class="nav-link">Map</router-link>
             </li>
           </ul>
         </div>
@@ -36,7 +36,6 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
 * {
   font-family: 'Muli', sans-serif;
-
 }
 .navbar.bg-primary{
   background-color: rgb(30, 140, 160)!important;
@@ -56,7 +55,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #1f2933;
-  background-color: #e9ebee;
+
 }
 .main_viewport{
   max-width: 1200px;
@@ -66,7 +65,7 @@ export default {
 .router-link {
   cursor: pointer;
 }
-.main_container{
+.main-container{
   position: relative;
   margin: 0 auto;
   max-width: 1200px;
@@ -83,6 +82,8 @@ p{
     height: 12em;
     width: 12em;
     object-fit: cover;
-    border-radius: 7px;
+    border-radius: 20px;
+    cursor: pointer;
+
 }
 </style>
