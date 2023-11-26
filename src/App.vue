@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-body">
     <nav class="navbar navbar-expand-lg bg-body-tertiary bg-primary bg-gradient mt-0 navbar-fixed-top">
       <div class="container-fluid">
         <router-link to='/gallery' class="navbar-brand">Gallery</router-link>
@@ -24,8 +24,6 @@
 </template>
 
 <script>
-
-
 export default {
   name: 'App',
 }
@@ -43,7 +41,7 @@ export default {
 }
 
 .navbar{
-  border-bottom: 3px solid black;
+  border-bottom: 3px solid rgb(21, 85, 97);
 }
 .loading{
   margin-top: 25px;
@@ -55,7 +53,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #1f2933;
-
+  height: fit-content;
 }
 .main_viewport{
   max-width: 1200px;
@@ -69,18 +67,16 @@ export default {
   position: relative;
   margin: 0 auto;
   max-width: 1200px;
+  padding: 10px;
 }
-body {
-  background-color: #e9ebee;
-  padding: 5px;
-}
+
 p{
   color: #969696;
 }
 .thumbnail {
     margin: .5em .5em;
-    height: 12em;
-    width: 12em;
+    height: 11.5em;
+    width: 11.5em;
     object-fit: cover;
     border-radius: 20px;
     cursor: pointer;

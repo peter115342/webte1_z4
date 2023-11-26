@@ -2,14 +2,14 @@
     "images": [
       {
         "name": "Rybník Amerika III",
-        "description": "Jazero a lavička",
+        "description": "Lavička s erbom Trnovec nad Váhom pri rybníku",
         "url": "/photos/amerika.jpg",
         "timestamp": "2023-10-05",
         "coordinates": {
             "latitude":  48.14431,
             "longitude": 17.91958
-          }
-
+          },
+          "location":"Trnovec nad Váhom"
 
       },
       {
@@ -20,7 +20,8 @@
         "coordinates": {
             "latitude": 48.15230,
             "longitude": 17.87364
-          }
+          },
+          "location":"Šaľa"
 
       },
       {
@@ -31,7 +32,8 @@
         "coordinates": {
             "latitude": 48.15180,
             "longitude": 17.07346
-          }
+          },
+          "location":"Karlova Ves"
       },
       {
         "name": "FIIT STU",
@@ -40,8 +42,9 @@
         "timestamp": "2023-11-04",
         "coordinates": {
             "latitude": 48.15424,
-            "longitude": 17.98765
-          }
+            "longitude": 17.07199
+          },
+          "location":"Karlova Ves"
 
       },
       {
@@ -52,7 +55,8 @@
         "coordinates": {
             "latitude": 48.15214,
             "longitude": 17.87679
-          }
+          },
+          "location":"Šaľa"
 
       },
       {
@@ -63,7 +67,8 @@
         "coordinates": {
             "latitude": 48.15163,
             "longitude": 17.92686
-          }
+          },
+          "location":"Trnovec nad Váhom"
 
       },
       {
@@ -74,7 +79,8 @@
         "coordinates": {
             "latitude": 48.14544,
             "longitude": 17.10672
-          }
+          },
+          "location":"Staré Mesto"
 
       },
       {
@@ -85,7 +91,8 @@
         "coordinates": {
             "latitude": 48.1585,
             "longitude": 17.06428
-          }
+          },
+          "location":"Karlova Ves"
       },
       {
         "name": "Spojená škola Nivy 2 Šaľa",
@@ -95,7 +102,8 @@
         "coordinates": {
             "latitude": 48.16827,
             "longitude": 17.88786
-          }
+          },
+          "location":"Šaľa"
 
       },
       {
@@ -105,8 +113,9 @@
         "timestamp": "2023-11-07",
         "coordinates": {
             "latitude": 48.14878,
-            "longitude": 17.10768
-          }
+            "longitude": 17.10764
+          },
+          "location":"Staré Mesto"
 
 
       },
@@ -116,10 +125,11 @@
         "url": "/photos/SNP.jpg",
         "timestamp": "2023-11-07",
         "coordinates": {
-            "latitude":  48.13687,
-            "longitude": 17.10464
+            "latitude": 48.13838,
+            "longitude": 17.10454
 
-          }
+          },
+          "location":"Staré Mesto"
       },
       {
         "name": "Zvonica v Trnovci nad Váhom",
@@ -129,7 +139,8 @@
         "coordinates": {
             "latitude": 48.14722,
             "longitude": 17.92654
-          }
+          },
+          "location":"Trnovec nad Váhom"
 
       }
     ]
