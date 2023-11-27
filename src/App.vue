@@ -66,8 +66,8 @@ export default {
 .main-container{
   position: relative;
   margin: 0 auto;
-  max-width: 1200px;
-  padding: 10px;
+  max-width: 1250px;
+  padding: 8px;
 }
 
 p{
@@ -75,8 +75,8 @@ p{
 }
 .thumbnail {
     margin: .5em .5em;
-    height: 11.5em;
-    width: 11.5em;
+    height: 12em;
+    width: 12em;
     object-fit: cover;
     border-radius: 20px;
     cursor: pointer;

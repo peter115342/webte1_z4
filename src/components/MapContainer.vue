@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-container">
     <div ref="map" class="map-container">
       <button id="route-button" @click="toggleRouteVisibility">Toggle Route Visibility</button>
 
@@ -33,7 +33,7 @@ export default {
     this.map = new mapboxgl.Map({
       container: this.$refs.map,
       center: [17.5410, 48.1972],
-      zoom: 6,
+      zoom: 5,
     });
 
     this.map.on('style.load', () => {
@@ -59,7 +59,6 @@ export default {
       }
     },
     getDirections(coordinates) {
-      // Fetch directions only if coordinates are provided
       if (coordinates && coordinates.length > 0) {
         const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordinates.join(';')}?geometries=geojson&access_token=${mapboxgl.accessToken}`;
 
@@ -69,7 +68,6 @@ export default {
             if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
               const route = data.routes[0].geometry;
 
-              // Remove existing 'directions' source and layer
               if (this.map.getSource('directions')) {
                 this.map.removeLayer('directions');
                 this.map.removeSource('directions');
@@ -94,7 +92,7 @@ export default {
                 paint: {
                   'line-color': 'rgb(209, 81, 22)',
                   'line-width': 5,
-                  'line-opacity': this.isRouteVisible ? 0.75 : 0, // Set opacity based on visibility
+                  'line-opacity': this.isRouteVisible ? 0.75 : 0,
                 },
               });
 
@@ -111,7 +109,6 @@ export default {
     toggleRouteVisibility() {
       this.isRouteVisible = !this.isRouteVisible;
 
-      // Update the layer opacity based on visibility
       if (this.map.getLayer('directions')) {
         this.map.setPaintProperty('directions', 'line-opacity', this.isRouteVisible ? 0.75 : 0);
       }
@@ -131,8 +128,10 @@ export default {
 <style scoped>
 .map-container {
   width: 100%;
-  height: 80vh; 
+  height: 80vh;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
+
 #route-button{
 position: absolute;
 z-index: 1;
