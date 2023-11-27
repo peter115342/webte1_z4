@@ -4,7 +4,7 @@
         "name": "Rybník Amerika III",
         "description": "Lavička s erbom Trnovec nad Váhom pri rybníku",
         "url": "/photos/amerika.jpg",
-        "timestamp": "2023-10-05",
+        "timestamp": "2023-10-01",
         "coordinates": {
             "latitude":  48.14431,
             "longitude": 17.91958
@@ -28,7 +28,7 @@
         "name": "FEI STU",
         "description": "Fakulta elektrotechniky a informatiky",
         "url": "/photos/FEI.jpg",
-        "timestamp": "2023-11-04",
+        "timestamp": "2023-11-05",
         "coordinates": {
             "latitude": 48.15180,
             "longitude": 17.07346
@@ -51,7 +51,7 @@
         "name": "Kaštieľ v Šali ",
         "description": " Najstaršia a najhodnotnejšia kultúrno-historická pamiatka Šale",
         "url": "/photos/kastiel.jpg",
-        "timestamp": "2023-10-06",
+        "timestamp": "2023-10-05",
         "coordinates": {
             "latitude": 48.15214,
             "longitude": 17.87679
@@ -63,7 +63,7 @@
         "name": "Kostol v Trnovci Nad Váhom",
         "description": "Kostol Premenenia Pána",
         "url": "/photos/kostol.jpg",
-        "timestamp": "2023-10-05",
+        "timestamp": "2023-10-02",
         "coordinates": {
             "latitude": 48.15163,
             "longitude": 17.92686
@@ -75,7 +75,7 @@
         "name": "Michalská brána",
         "description": "Je jediná zachovaná brána z pôvodných štyroch v bratislavskom mestskom opevnení.",
         "url": "/photos/Michalska.jpg",
-        "timestamp": "2023-11-07",
+        "timestamp": "2023-11-02",
         "coordinates": {
             "latitude": 48.14544,
             "longitude": 17.10672
@@ -87,7 +87,7 @@
         "name": "ŠD Mladosť",
         "description": "Internát STU v Mlynskej Doline.",
         "url": "/photos/Mladost.jpg",
-        "timestamp": "2023-11-04",
+        "timestamp": "2023-11-06",
         "coordinates": {
             "latitude": 48.1585,
             "longitude": 17.06428
@@ -98,7 +98,7 @@
         "name": "Spojená škola Nivy 2 Šaľa",
         "description": "Fontána pred spojenou školou,ktorá naposledy videla vodu za dávnych čias socializmu.",
         "url": "/photos/Nivy.jpg",
-        "timestamp": "2023-10-06",
+        "timestamp": "2023-10-04",
         "coordinates": {
             "latitude": 48.16827,
             "longitude": 17.88786
@@ -110,7 +110,7 @@
         "name": "Prezidentský  palác",
         "description": "Nazývaný aj Grasalkovičov palác.",
         "url": "/photos/palac.jpg",
-        "timestamp": "2023-11-07",
+        "timestamp": "2023-11-01",
         "coordinates": {
             "latitude": 48.14878,
             "longitude": 17.10764
@@ -123,7 +123,7 @@
         "name": "Most SNP",
         "description": "Prezývaný aj ako UFO most.",
         "url": "/photos/SNP.jpg",
-        "timestamp": "2023-11-07",
+        "timestamp": "2023-11-03",
         "coordinates": {
             "latitude": 48.13838,
             "longitude": 17.10454
@@ -135,7 +135,7 @@
         "name": "Zvonica v Trnovci nad Váhom",
         "description": "Barokovo-klasicistická zvonica postavená v druhej polovici 18. storočia.",
         "url": "/photos/zvonica.jpg",
-        "timestamp": "2023-11-07",
+        "timestamp": "2023-10-03",
         "coordinates": {
             "latitude": 48.14722,
             "longitude": 17.92654

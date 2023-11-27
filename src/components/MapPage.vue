@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <div id="layout">
-      <MapContainer :markers="markers" :dates ="dates" />
+      <MapContainer :images="images" />
     </div>
   </div>
 </template>
@@ -16,9 +16,7 @@ export default {
   },
   data() {
     return {
-      markers: [],
-      dates:[],
-
+      images: [],
     };
   },
   created() {
@@ -39,10 +37,7 @@ export default {
           throw new Error('Failed to fetch JSON data');
         })
         .then((jsonData) => {
-          console.log(jsonData.images);
-          this.markers = jsonData.images.map((image) => image.coordinates);
-          this.dates = jsonData.images.map((image) => image.timestamp);
-
+          this.images = jsonData.images;
         })
         .catch((error) => {
           console.error(error);

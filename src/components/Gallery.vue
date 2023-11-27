@@ -115,6 +115,7 @@ export default {
       this.selectedImage = null;
       this.currentIndex = 0;
       clearInterval(this.slideshowInterval);
+      this.slideshowActive = false;
       this.$nextTick(() => {
         const modal = document.querySelector('.modal');
         if (modal) {
@@ -122,26 +123,26 @@ export default {
         }
       });
     },
-    navigate(direction) {
-      this.currentIndex =
-        (this.currentIndex + direction + this.originalImages.length) %
-        this.originalImages.length;
-      this.selectedImage = this.originalImages[this.currentIndex];
-    },
-    toggleSlideshow(event) {
-      event.stopPropagation();
 
-      if (this.slideshowInterval) {
-        clearInterval(this.slideshowInterval);
-        this.slideshowInterval = null;
-        this.slideshowActive = false;
-      } else {
-        this.slideshowInterval = setInterval(() => {
-          this.navigate(1);
-        }, 2500);
-        this.slideshowActive = true;
-      }
-    },
+    navigate(direction, images) {
+  this.currentIndex =
+    (this.currentIndex + direction + images.length) % images.length;
+  this.selectedImage = images[this.currentIndex];
+},
+    toggleSlideshow(event) {
+  event.stopPropagation();
+
+  if (this.slideshowInterval) {
+    clearInterval(this.slideshowInterval);
+    this.slideshowInterval = null;
+    this.slideshowActive = false;
+  } else {
+    this.slideshowInterval = setInterval(() => {
+      this.navigate(1, this.filteredImages);
+    }, 2500);
+    this.slideshowActive = true;
+  }
+},
   },
 };
 </script>
@@ -226,9 +227,7 @@ object-fit: fill;
   cursor: pointer;
   outline: none;
   padding: 10px;
-
   border-radius: 5px;
-
 }
 .image-details{
   position: absolute;
