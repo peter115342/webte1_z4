@@ -2,7 +2,9 @@
   <div class="main-container">
     <div ref="map" class="map-container">
       <button id="route-button" @click="toggleRouteVisibility">Toggle Route Visibility</button>
-
+      <div v-if="isRouteVisible" class="route-info">
+        Route Length: {{ routeLength.toFixed(2) }} km
+      </div>
     </div>
   </div>
 </template>
@@ -25,7 +27,8 @@ export default {
       styleLoaded: false,
       directions: null,
       sortedImages: [],
-      isRouteVisible: true,
+      isRouteVisible: false,
+      routeLength: 0, // New property to store route length
     };
   },
   mounted() {
@@ -46,7 +49,6 @@ export default {
     addMarkers() {
       if (this.styleLoaded && Array.isArray(this.images) && this.map) {
         this.sortedImages = this.sortedImagesComputed;
-        console.log(this.sortedImages);
 
         this.sortedImages.forEach((image) => {
           new mapboxgl.Marker()
@@ -96,6 +98,8 @@ export default {
                 },
               });
 
+              this.routeLength = data.routes[0].distance / 1000; // Convert meters to kilometers
+
               const bounds = coordinates.reduce((bounds, coord) => {
                 return bounds.extend(coord);
               }, new mapboxgl.LngLatBounds(coordinates[0], coordinates[coordinates.length - 1]));
@@ -132,18 +136,38 @@ export default {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
-#route-button{
-position: absolute;
-z-index: 1;
-top: 0;
-left: 0;
-transform: translate(5%, 25%);
-outline: none;
-border: none;
-border-radius: 5px;
-width: 175px;
-height: 36px;
-background: rgba(0, 0, 0, 0.65);
-color: aliceblue;
+#route-button {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  transform: translate(5%, 25%);
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  width: 175px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.8);
+  font-weight: bolder;
+
+}
+
+.route-info {
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  left: 0px;
+  transform: translate(140%, 25%);
+  height: 36px;
+  outline: none;
+  border: none;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  text-align: center;
+  line-height: 36px;
+  font-weight: bolder;
+  padding-left: 4px;
+  padding-right: 4px;
+
 }
 </style>
