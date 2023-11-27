@@ -11,7 +11,8 @@ import Gallery from './components/Gallery.vue';
 import MapPage from './components/MapPage.vue';
 
 const router = createRouter({
-  history: createWebHistory(process.env.NODE_ENV === "production" ? "/~xmuzslay/kyahabpa/" : "/"),
+  history: createWebHistory(process.env.NODE_ENV === "production" ? "/~xmuzslay/kyahabpana/" : "/"),
+  base: 'https://webte1.fei.stuba.sk/~xmuzslay/kyahabpana/',
   routes: [
     { path: '/', redirect: '/gallery' },
     { path: '/gallery', component: Gallery },

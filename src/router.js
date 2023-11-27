@@ -21,6 +21,12 @@ export default new Router({
       path: '/map-page',
       name: 'MapPage',
       component: MapPage
-    }
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: '404',
+      component: () => import('./Views/404.vue')
+  }
+
   ]
 });

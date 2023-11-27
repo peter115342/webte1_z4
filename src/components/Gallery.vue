@@ -73,7 +73,7 @@ export default {
     getImages() {
       const publicPath =
         process.env.NODE_ENV === 'production'
-          ? '/~xmuzslay/becnkhchag/'
+          ? '/~xmuzslay/kyahabpana/'
           : '/';
       const jsonPath = publicPath + 'images.json';
       fetch(jsonPath)
