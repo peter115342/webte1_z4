@@ -10,8 +10,14 @@
     <div v-if="selectedImage" class="image-modal">
       <div class="modal-content">
         <img :src="selectedImage.url" :alt="selectedImage.alt" />
-        <button @click="closeModal">Close</button>
+        <button class="close-button" @click="closeModal">&times;</button>
+        <div class="image-details">
+            <h3>{{ selectedImage.name }}</h3>
+            <p>{{ selectedImage.description }}</p>
+            <p>{{ selectedImage.timestamp }}</p>
+          </div>
       </div>
+      
     </div>
   </div>
 </template>
@@ -179,7 +185,7 @@ export default {
   z-index: 1;
   top: 0px;
   left: 0px;
-  transform: translate(140%, 25%);
+  transform: translate(135%, 25%);
   height: 36px;
   outline: none;
   border: none;
@@ -203,23 +209,50 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 }
 
 .modal-content {
+  position: relative;
+  background-color: #fefefe;
+  text-align: center;
   max-width: 80%;
-  max-height: 80%;
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  overflow: auto;
+  margin: 0 auto;
+  margin-top: 50px;
 }
 
 img {
   max-width: 100%;
-  max-height: 100%;
+  max-height: 90vh;
+object-fit: fill;
 }
 
-button {
-  margin-top: 10px;
+.close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 32px;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.75);
+  border: none;
+  color: white;
+  outline: none;
+  transform: translate(-25%, 25%);
+  width: 50px;
+  height: 50px;}
+  .image-details{
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: none;
+  color: white;
+  outline: none;
+  background: rgba(0, 0, 0, 0.75);
+  width: fit-content;
+}
+.image-details h3,
+.image-details p {
+  margin: 0;
 }
 </style>
