@@ -35,10 +35,12 @@ export default {
 * {
   font-family: 'Muli', sans-serif;
 }
-.navbar.bg-primary{
-  background-color: rgb(30, 140, 160)!important;
+
+.navbar.bg-primary {
+  background: linear-gradient(to bottom, rgb(10, 92, 207), rgb(30, 140, 160)) !important;
   width: 100%;
 }
+
 
 .navbar{
   border-bottom: 3px solid rgb(21, 85, 97);
