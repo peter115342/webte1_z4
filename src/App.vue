@@ -40,7 +40,20 @@ export default {
   background: linear-gradient(to bottom, rgb(10, 92, 207), rgb(30, 140, 160)) !important;
   width: 100%;
 }
+.navbar-nav .nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
 
+.navbar-nav .nav-link {
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
 
 .navbar{
   border-bottom: 3px solid rgb(21, 85, 97);
@@ -68,7 +81,7 @@ export default {
 .main-container{
   position: relative;
   margin: 0 auto;
-  max-width: 1250px;
+  max-width: 1650px;
   padding: 8px;
 }
 

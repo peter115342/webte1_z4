@@ -1,25 +1,45 @@
 <template>
   <div class="main-container">
     <div ref="map" class="map-container">
-      <button id="route-button" @click="toggleRouteVisibility">Toggle Route Visibility</button>
+      <button id="route-button" @click="toggleRouteVisibility">Toggle Route</button>
       <div v-if="isRouteVisible" class="route-info">
         Route Length: {{ routeLength.toFixed(2) }} km
       </div>
     </div>
 
-    <div v-if="selectedImage" class="image-modal">
+    <div v-if="selectedImage" class="image-modal" @click="closeModalOnOverlay">
       <div class="modal-content">
         <img :src="selectedImage.url" :alt="selectedImage.alt" />
         <button class="close-button" @click="closeModal">&times;</button>
         <div class="image-details">
+          <div class="image-info">
             <h3>{{ selectedImage.name }}</h3>
             <p>{{ selectedImage.description }}</p>
             <p>{{ selectedImage.timestamp }}</p>
           </div>
+          <div class="thumbnails-and-location">
+            <div class="image-thumbnails">
+              <img
+                v-for="img in imagesWithSameLocation"
+                :key="img.id"
+                :src="img.url"
+                :alt="img.alt"
+                @click="openModal(img)"
+              />
+            </div>
+            <div class="location-info">
+              <h5>{{ selectedImage.location }}</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="scroll-message" >
+          <p>Scroll down for more </p>
+        </div>
       </div>
-      
     </div>
   </div>
+  <p class="note">I know this might not be the most efficient solution, but I like the 3D buildings and lightning API Mapbox GL v3 Beta brings </p>
 </template>
 
 <script>
@@ -43,6 +63,7 @@ export default {
       isRouteVisible: false,
       routeLength: 0,
       selectedImage: null,
+      imagesWithSameLocation: [],
     };
   },
   mounted() {
@@ -58,7 +79,6 @@ export default {
       this.addMarkers();
       this.getDirections();
       this.map.setConfigProperty('basemap', 'lightPreset', 'dawn');
-
     });
   },
   methods: {
@@ -82,61 +102,70 @@ export default {
     },
     openModal(image) {
       this.selectedImage = image;
+      this.imagesWithSameLocation = this.images.filter(
+        (img) => img.location === this.selectedImage.location
+      );
     },
     closeModal() {
       this.selectedImage = null;
+      this.imagesWithSameLocation = [];
     },
+    closeModalOnOverlay(event) {
+      if (event.target.classList.contains('image-modal')) {
+        this.closeModal();
+      }
+    },
+
     getDirections(coordinates) {
-  if (coordinates && coordinates.length > 0) {
-    const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordinates.join(';')}?geometries=geojson&steps=true&overview=full&access_token=${mapboxgl.accessToken}`;
+      if (coordinates && coordinates.length > 0) {
+        const url = `https://api.mapbox.com/directions/v5/mapbox/driving/${coordinates.join(';')}?geometries=geojson&steps=true&overview=full&access_token=${mapboxgl.accessToken}`;
 
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
-          const route = data.routes[0].geometry;
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
+              const route = data.routes[0].geometry;
 
-          if (this.map.getSource('directions')) {
-            this.map.removeLayer('directions');
-            this.map.removeSource('directions');
-          }
+              if (this.map.getSource('directions')) {
+                this.map.removeLayer('directions');
+                this.map.removeSource('directions');
+              }
 
-          this.map.addSource('directions', {
-            type: 'geojson',
-            data: {
-              type: 'Feature',
-              geometry: route,
-            },
-          });
+              this.map.addSource('directions', {
+                type: 'geojson',
+                data: {
+                  type: 'Feature',
+                  geometry: route,
+                },
+              });
 
-          this.map.addLayer({
-            id: 'directions',
-            type: 'line',
-            source: 'directions',
-            layout: {
-              'line-join': 'round',
-              'line-cap': 'round',
-            },
-            paint: {
-              'line-color': 'rgb(209, 81, 22)',
-              'line-width': 5,
-              'line-opacity': this.isRouteVisible ? 0.75 : 0,
-            },
-          });
+              this.map.addLayer({
+                id: 'directions',
+                type: 'line',
+                source: 'directions',
+                layout: {
+                  'line-join': 'round',
+                  'line-cap': 'round',
+                },
+                paint: {
+                  'line-color': 'rgb(249, 75, 52)',
+                  'line-width': 5,
+                  'line-opacity': this.isRouteVisible ? 0.75 : 0,
+                },
+              });
 
-          this.routeLength = data.routes[0].distance / 1000; // Convert meters to kilometers
+              this.routeLength = data.routes[0].distance / 1000; // Convert meters to kilometers
 
-          const bounds = coordinates.reduce((bounds, coord) => {
-            return bounds.extend(coord);
-          }, new mapboxgl.LngLatBounds(coordinates[0], coordinates[coordinates.length - 1]));
+              const bounds = coordinates.reduce((bounds, coord) => {
+                return bounds.extend(coord);
+              }, new mapboxgl.LngLatBounds(coordinates[0], coordinates[coordinates.length - 1]));
 
-          this.map.fitBounds(bounds, { padding: 20 });
-        }
-      })
-      .catch((error) => console.error('Error fetching directions:', error));
-  }
-},
-
+              this.map.fitBounds(bounds, { padding: 20 });
+            }
+          })
+          .catch((error) => console.error('Error fetching directions:', error));
+      }
+    },
 
     toggleRouteVisibility() {
       this.isRouteVisible = !this.isRouteVisible;
@@ -157,11 +186,15 @@ export default {
 };
 </script>
 
+
 <style scoped>
+
 .map-container {
   width: 100%;
   height: 80vh;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  border-radius: 2%;
+  margin-top: 0px;
 }
 
 #route-button {
@@ -177,7 +210,6 @@ export default {
   height: 36px;
   background: rgba(255, 255, 255, 0.8);
   font-weight: bolder;
-
 }
 
 .route-info {
@@ -196,7 +228,11 @@ export default {
   font-weight: bolder;
   padding-left: 4px;
   padding-right: 4px;
+}
 
+.thumbnails-and-location {
+  display: flex;
+  flex-direction: column;
 }
 
 .image-modal {
@@ -214,17 +250,45 @@ export default {
 
 .modal-content {
   position: relative;
-  background-color: #fefefe;
+  background: rgba(0, 0, 0, 0.7);
   text-align: center;
   max-width: 80%;
   margin: 0 auto;
   margin-top: 50px;
+  overflow-y: auto; /* Added overflow-y here */
 }
 
 img {
   max-width: 100%;
   max-height: 90vh;
-object-fit: fill;
+  object-fit: fill;
+}
+
+.image-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.image-thumbnails img {
+  width: 90px;
+  height: 60px;
+  object-fit: cover;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.image-thumbnails {
+  position: relative;
+  margin: 0 auto;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.image-info, .location-info {
+  text-align: center;
 }
 
 .close-button {
@@ -239,8 +303,10 @@ object-fit: fill;
   outline: none;
   transform: translate(-25%, 25%);
   width: 50px;
-  height: 50px;}
-  .image-details{
+  height: 50px;
+}
+
+.image-details {
   position: absolute;
   bottom: 0%;
   left: 50%;
@@ -251,8 +317,71 @@ object-fit: fill;
   background: rgba(0, 0, 0, 0.75);
   width: fit-content;
 }
-.image-details h3,
-.image-details p {
+
+.location-info {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.image-details h3, .image-details p {
   margin: 0;
 }
+
+.note {
+  margin-top: 10px;
+  font-size: smaller;
+  color: rgb(171, 184, 196);
+}
+
+.scroll-message {
+    position: absolute;
+    bottom: 5px;    
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    display: none;
+    background: rgba(0, 0, 0, 0.75);
+    border: none;
+  color: white;
+  outline: none;
+    max-width: 100%;
+    padding-right: 5px;
+  padding-left: 5px;
+  text-align: center;
+justify-content: center;
+height:  32px;
+white-space: nowrap;
+  }
+
+
+@media screen and (max-width: 768px) {
+  .scroll-message {
+      display: block;
+    }
+  .image-details {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+
+  .image-thumbnails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal-content {
+    max-height: calc(100vh - 100px);
+
+  }
+
+  .main-container {
+    overflow-y: auto;
+  }
+}
+
 </style>
+
+
